@@ -1,0 +1,51 @@
+<div class="row">
+    <form class="col-md-12"  #formAddEmpleado="ngForm">
+        <div class="row">
+            <div class="col-md-12"><h3 class="colorAzul" style="text-align: center;">Agregar Usuario</h3></div>
+
+            <div class="divider"></div>
+
+             <!-- Loader -->
+            <div class="col-md-12" style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+
+            
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="userEmail">Username:</label>
+                <input type="text" #userEmail="ngModel" [(ngModel)]="empleado.userEmail" name="userEmail" required class="form-control" id="userEmail"  oninput="this.value = this.value.toUpperCase()">
+            </div>
+            
+            <div class="col-sm-12 col-md-6">
+                <label for="select">Empleado:</label>
+                <select class="custom-select" [(value)]="empleado.Id_Empleado" [(ngModel)]="empleado.Id_Empleado" required name="Id_Empleado" id="select">
+                    <option *ngFor="let empleado of empleados" [value]="empleado.Id_Empleado">{{ empleado.nombre_Empleado }}</option>
+                </select>
+            </div>
+
+            <div class="col-sm-12"></div>
+             
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="password">Contraseña:</label>
+                <input type="password" #password="ngModel" [(ngModel)]="empleado.password" name="password" required class="form-control" id="password" >
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="password2">Confirmar Contraseña:</label>
+                <input type="password"  name="password2" required class="form-control" id="password2"  [(ngModel)]="confirm" >
+            </div>
+
+            <h4 class="botonRojo white-text col-sm-12 text-center"  *ngIf="confirm !== empleado.password && confirm.length > 0"><strong>Las contraseñas no coinciden</strong></h4>
+
+            <div class="col-sm-12" style="margin-bottom: 10px;">
+                <button class="btn botonCafe waves-effect text-white" style="width: 100%;" (click)="cerrarModal()" [disabled]="desactivado">Cancelar</button>
+            </div>
+
+            <div class="col-sm-12">
+                <input class="btn waves-effect waves-light botonVerde text-white" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formAddEmpleado.form.valid || confirm !== empleado.password || empleado.Id_Empleado === '' || desactivado" (click)="agregarEmpleado()">
+            </div>
+
+        </div>
+    </form>
+</div>
+    

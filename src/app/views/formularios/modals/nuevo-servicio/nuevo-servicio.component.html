@@ -1,0 +1,255 @@
+<!-- Loader -->
+<div  style="padding: 5px 0px;">
+  <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+</div>
+
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <div mat-dialog-content>
+        <form [formGroup]="firstFormGroup" novalidate>
+          <ng-template matStepLabel>Datos del cliente</ng-template>
+          <h3 class="w-100 colorAzul text-center">CLIENTE</h3>
+          <mat-form-field class="w-100">
+              <mat-label>Tramitador:</mat-label>
+              <mat-select  class="validate" formControlName="empresa" required>
+                  <mat-option *ngFor="let item of usuarios" [value]="item.Id_Usuario" >{{ item.nombre_Tramitador }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+
+          <div class="right-align">
+            <button mat-button matStepperNext class="botonAzul" [disabled]="firstFormGroup.invalid || desactivado">Siguiente</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+
+    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+      <div mat-dialog-content>
+        <form [formGroup]="secondFormGroup" class="row">
+          <ng-template matStepLabel>Datos del producto</ng-template>
+            <h3 class="w-100 colorAzul text-center">TIPO DE SERVICIO</h3>
+              <div class="col-sm-6">
+                <div>
+                  <div class="form-check">
+                      <input type="radio" name="servicio" class="form-check-input" formControlName="servicio" required value="C" (change)="handleChange($event)" id="constancia" >
+                      <label class="form-check-label font-15" for="constancia">Constancia</label>
+                  </div>
+                </div>
+  
+                <div>
+                  <div class="form-check">
+                      <input type="radio" name="servicio" class="form-check-input" formControlName="servicio" required value="D" (change)="handleChange($event)" id="dictamen">
+                      <label class="font-15 form-check-label" for="dictamen">Dictamen</label>
+                  </div>
+                </div>
+              </div>
+
+  
+            <mat-form-field class="col-sm-6">
+              <mat-label>Normas:</mat-label>
+              <mat-select class="" required formControlName="norma">
+                  <mat-option *ngFor="let norma of normas" [value]="norma.Id_Norma">{{ norma.nombre_Norma }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <h3 class="w-100 colorAzul text-center">ANEXOS</h3>
+
+<!-- --------------------------------  Checkbox ---------------------------------------->
+            <div class="col-sm-12 mgt5">
+              <div id="checkbox" *ngFor="let item of arrayCheckbox; let i = index"> 
+                <div class="form-check" >
+                  <input type="checkbox" name="anexos" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}" class="form-check-input" [value]="i+1" (change)="cambiarContador(item,i)" [id]="i"/>
+                  <label class="form-check-label" [for]="i">{{ item.name }}</label>
+                </div>
+
+                <div class="custom-file" *ngIf="item.active">
+                  <input type="file" class="custom-file-input" id="customFileLang" lang="es" multiple #file (change)="item.file = borrarfile(file.value, item.file, $event)">
+                  <label class="custom-file-label" for="customFileLang" name="file">Sube uno o varios archivos</label>
+                </div>
+              </div>
+            </div>
+
+<!-- -------------------------------- Fin Checkbox ---------------------------------------->
+
+<h3 class="w-100 colorAzul text-center" *ngIf="dictamenTrue">ANEXOS PARA DICTAMEN</h3>
+
+<!-- --------------------------------  Checkbox Dictamen ---------------------------------------->
+<div class="col-sm-12 mgt5" *ngIf="dictamenTrue">
+    <div id="checkbox" *ngFor="let item of arrayCheckboxDictamen; let i = index"> 
+        <div >
+          <input type="checkbox" name="anexos" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}" class="form-check-input" [value]="i+1" (change)="cambiarContadorDictamen(item,i)" [id]="i1"/>
+          <label class="form-check-label" [for]="i1">{{ item.name }}</label>
+        </div>
+
+        <div class="custom-file" *ngIf="item.active">
+          <input type="file" class="custom-file-input" id="customFileLang" lang="es" multiple #file (change)="item.file = borrarfileDictamen(file.value, item.file, $event)">
+          <label class="custom-file-label" for="customFileLang" name="file">Sube uno o varios archivos</label>
+        </div>
+    </div>
+  </div>
+
+<!-- -------------------------------- Fin Checkbox Dictamen ---------------------------------------->
+            
+            <h3 class="w-100 colorAzul text-center">DATOS PRODUCTO</h3>
+
+            <div class="form-group col-sm-8">
+              <label for="producto">DENOMINACION DEL PRODUCTO</label>
+              <input id="producto" type="text" formControlName="producto" required class="form-control" maxlength="60">
+            </div> 
+
+
+            <div class="form-group col-sm-4">
+              <label for="marca">MARCA</label>
+              <input  id="marca" type="text" class="form-control" formControlName="marca" required maxlength="30">
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="pais">PAIS (ES) DE ORIGEN</label>
+              <input  id="pais" type="text" class="form-control" required formControlName="pais" maxlength="30">
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="modelo">MODELOS (S)</label>
+              <input  id="modelo" type="text" class="form-control" required formControlName="modelo" maxlength="200">
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="presentacion">PRESENTACION</label>
+              <input  id="presentacion" type="text" class="form-control" required formControlName="presentacion" maxlength="80">
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="contenido">CONTENIDO</label>
+              <input  id="contenido" type="text" class="form-control" required formControlName="contenido" maxlength="45">
+            </div> 
+
+
+<!-- -------------------------------------------- 1er bloque Dictamen ------------------------------------------ -->
+
+            <form *ngIf="dictamenTrue" novalidate [formGroup]="dictamenFormGroup" class="row w-100">
+
+                <h3 class="w-100 colorAzul text-center">SOLO DICTAMEN</h3>
+
+              <div class="form-group col-sm-6">
+                <label for="pedimento">No. de Pedimento</label>
+                <input type="number" class="form-control" id="pedimento" required formControlName="pedimento" maxlength="50">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label for="factura">No. de Factura</label>
+                <input type="text" class="form-control" id="factura" required formControlName="factura" maxlength="40">
+              </div>
+
+              <div class="form-group col-sm-4">
+                <label for="lote">Lote</label>
+                <input type="text"  id="lote" required maxlength="5" formControlName="lote" [class.invalid]="dictamenFormGroup.controls['lote'].invalid && dictamenFormGroup.controls['lote'].dirty" class="form-control" maxlength="10">
+              </div>
+
+              <h3 class="w-100 colorAzul text-center">TIPO DE DOMICILIO</h3>
+
+              <div class="col-sm-12 text-center">
+                
+                  <div class="form-check form-check-inline">
+                      <input type="radio" name="domicilio" class="form-check-input" formControlName="domicilio" required value="P" id="particular">
+                      <label class="font-15 form-check-label" for="particular">Particular</label>
+                  </div>
+                
+                  <div class="form-check form-check-inline" style="margin-left: 20px;">
+                      <input type="radio" name="domicilio" class="form-check-input" formControlName="domicilio" required value="F" id="fiscal">
+                      <label class="font-15 form-check-label" for="fiscal">Fiscal</label>
+                  </div>
+              </div>
+
+            </form>
+
+<!-- ------------------------------------------ Fin 1er bloque Dictamen --------------------------------------- -->
+
+
+          <div class="col-sm-12 d-flex justify-content-between">
+            <div >
+              <button mat-button matStepperPrevious  class="botonAzul" [disabled]="desactivado">Anterior</button>
+            </div>
+            
+            <div >
+              <button mat-button matStepperNext  class="botonAzul" [disabled]="secondFormGroup.invalid || contadorArchivos !== 0 || contadorArchivosDictamen !== 0 || dictamenFormGroup.invalid || desactivado" *ngIf="dictamenTrue; else dictamenHide">Siguiente</button>
+
+              <ng-template #dictamenHide>
+                <button mat-button   class="botonAzul" [disabled]="secondFormGroup.invalid || contadorArchivos !== 0 || desactivado" (click)="enviarForm()">Enviar Constancia</button>
+              </ng-template>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+
+    <mat-step *ngIf="dictamenTrue" [stepControl]="thirdFormGroup" [optional]="isOptional" >
+      <div mat-dialog-content>
+        <form [formGroup]="thirdFormGroup" class="row">
+          <ng-template matStepLabel>Domicilio Para Visita</ng-template>
+
+          <h3 class="w-100 colorAzul text-center">DOMICILIO</h3>
+
+          <div class="form-group col-sm-6">
+            <label for="calle">Calle</label>
+            <input id="calle" type="text" formControlName="calle" required class="form-control" maxlength="60">
+          </div> 
+          
+          <div class="form-group col-sm-6">
+            <label for="colonia">Colonia</label>
+            <input id="colonia" type="text" formControlName="colonia" required class="form-control" maxlength="50">
+          </div> 
+
+          <div class="form-group col-sm-6">
+            <label for="municipio">Alcaldia o Municipio</label>
+            <input id="municipio" type="text" formControlName="municipio" required class="form-control" maxlength="45">
+          </div> 
+
+          <div class="form-group col-sm-4">
+            <label for="estado">Estado</label>
+            <input id="estado" type="text" formControlName="estado" required class="form-control" maxlength="45">
+          </div> 
+
+          <div class="form-group col-sm-2">
+            <label for="cp">C.P.</label>
+            <input id="cp" type="text" formControlName="cp" required [class.invalid]="thirdFormGroup.controls['cp'].invalid && thirdFormGroup.controls['cp'].dirty" class="form-control" maxlength="5">
+          </div>
+
+          <h3 class="w-100 colorAzul text-center">Verificacion</h3>
+
+          <div class="form-group col-sm-12">
+            <label for="nombre">Nombre del contacto para la verificacion</label>
+            <input id="nombre" type="text" formControlName="nombre" required class="form-control" maxlength="60">
+          </div> 
+
+          <div class="form-group col-sm-6">
+            <label for="telefono">Telefono</label>
+            <input type="text"  id="telefono" required formControlName="telefono" [class.invalid]="thirdFormGroup.controls['telefono'].invalid && thirdFormGroup.controls['telefono'].dirty" class="form-control" maxlength="15">
+          </div> 
+
+          <div class="form-group col-sm-6">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" type="date" formControlName="fecha" required class="form-control">
+          </div> 
+
+
+          <!-- <div>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div> -->
+
+          
+          <div class="col-sm-12 d-flex justify-content-between">
+            <div >
+              <button mat-button matStepperPrevious  class="botonAzul" >Anterior</button>
+            </div>
+            
+            <div >
+              <button mat-button class="botonAzul" [disabled]="thirdFormGroup.invalid" (click)="enviarForm()">Enviar Dictamen</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

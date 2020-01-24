@@ -1,0 +1,69 @@
+<h4  class="text-center ">
+    <span class="colorVerde">{{ data.info.nombre_tramitador }}</span>
+    <i (click)="cerralModal()" id="close" class="material-icons text-right">clear</i>
+    
+    <!-- Loader -->
+    <div  style="padding: 5px 0px;">
+        <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+    </div>
+</h4> 
+<hr>
+<mat-dialog-content class="text-center">
+    <h4 class="colorAzul">Datos del Producto</h4>
+
+    <p *ngIf="data.info.Servicio == 'C'; else isDictamen ">
+        <strong>Servicio: </strong> <span >Constancia</span>
+    </p>
+    <ng-template #isDictamen>
+        <p><strong>Servicio: </strong> Dictamen</p>
+    </ng-template>
+
+    <p><strong>Norma: </strong> {{ data.info.Norma }}</p>
+    <p><strong>Producto: </strong> {{ data.info.nombre_producto }}</p>
+    
+    <p><strong>Marca: </strong> {{ data.info.marca_producto }}</p>
+    <p><strong>Pais: </strong> {{ data.info.pais_producto }}</p>
+    <p><strong>Modelo: </strong> {{ data.info.modelo_producto }}</p>
+    <p><strong>Presentancion: </strong> {{ data.info.presentacion_producto }}</p>
+    <p><strong>Contenido: </strong> {{ data.info.contenido_producto }}</p>
+
+    <div *ngIf="data.info.Servicio == 'D'">
+        <h4 class="colorAzul">Datos del Dictamen</h4>
+
+        <p><strong>Numero de Pedimento: </strong> {{ dictamenInfo.pedimento }}</p>
+        <p><strong>Numero de Factura: </strong> {{ dictamenInfo.factura }}</p>
+        <p><strong>Lote: </strong> {{ dictamenInfo.lote }}</p>
+        <p><strong>Regimen Aduanero: </strong>
+            <span *ngIf="dictamenInfo.domicilio === 'P'; else domicilioFiscal">Domicilio Particular</span>
+            <ng-template #domicilioFiscal>
+                <span>Domicilio Fiscal</span>
+            </ng-template>
+        </p>
+        <p><strong>Lote: </strong> {{ dictamenInfo.lote }}</p>
+
+        <h4 class="colorAzul">Datos de la visita</h4>
+
+        <p><strong>Domicilio: </strong> {{ dictamenInfo.calle_verificacion  }}</p>
+        <p><strong>No. Ext.: </strong> {{ dictamenInfo.numeroExterior  }}</p>
+        <p><strong>No. Int.: </strong> {{ dictamenInfo.numeroInterior  }}</p>
+        <p><strong>Colonia: </strong> {{ dictamenInfo.colonia_verificacion }}</p>
+        <p><strong>Codigo Postal: </strong> {{ dictamenInfo.codigo_postal_verificacion }}</p>
+        <p><strong>Alcaldia o Municipio: </strong> {{ dictamenInfo.municipio_verificacion }}</p>
+        <p><strong>Estado: </strong> {{ dictamenInfo.estado_verificacion }}</p>
+        <p><strong>Telefono: </strong> {{ dictamenInfo.telefono_verificacion }}</p>
+        <p><strong>Nombre del contacto: </strong> {{ dictamenInfo.nombre_verificacion }}</p>
+        <p><strong>Fecha Programada: </strong> {{ dictamenInfo.fecha_verificacion }}</p> 
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    
+    <button mat-button class="botonNaranja" style="margin-right: 5px;" (click)="generarPreservice()" *ngIf="data.info.status == 'E'; else finalService" [disabled]="desactivado">Pre Solicitud</button>
+    <ng-template #finalService>
+        <button mat-button class="botonLila" style="margin-right: 5px;" (click)="generarService()" [disabled]="desactivado">Solicitud</button>
+    </ng-template>
+
+    <button mat-button class="botonLila" style="margin-right: 5px;" [disabled]="desactivado" (click)="abrirFactura()" *ngIf="data.info.status == 'E'">Validar</button>
+    <button mat-button class="botonVerde" style="margin-right: 5px;" [disabled]="desactivado" (click)="editarForm()">Editar</button>
+    <button mat-button class="botonRojo" [disabled]="desactivado" (click)="borrarFile(data.info.Id_Form)" *ngIf="data.info.status == 'E'">Borrar</button>
+</mat-dialog-actions>

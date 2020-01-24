@@ -1,0 +1,73 @@
+<div class="container card mt-5">
+        <div>
+    
+            <!-- Loader -->
+            <div  style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+        
+            <div class="w-100">
+                <div class="text-center mt-3">
+                    <h3><strong class="colorAzul">EMPLEADOS</strong></h3>
+                </div>
+            
+                    
+    
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <button class="btn" (click)="conectarServidor()" data-toggle="tooltip" data-placement="top" title="Recargar Empleados">
+                            <i class="material-icons">replay</i>
+                        </button>
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                    </div>
+    
+                    <div>
+                        <button class="btn botonAzul white-text" (click)="formAddEmpleado()" [disabled]="desactivado"> Nuevo Empleado</button> 
+                    </div>
+                </div>
+        
+            </div>
+        
+        
+        <div>
+
+            <table mat-table [dataSource]="dataSource">
+            
+                <!-- Progress Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef class="botonAzul text-white text-center" style="font-size: 20px"> Nombre </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nombre_Empleado}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="iniciales">
+                    <th mat-header-cell *matHeaderCellDef  class="botonAzul text-white text-center" style="font-size: 20px;"> Iniciales </th>
+                    <td mat-cell *matCellDef="let row"> {{row.iniciales}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef  class="botonAzul text-white text-center" style="font-size: 20px;"> Acciones </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        <i class="material-icons colorAzul" (click)="editEmpleado(row)" data-toggle="tooltip" data-placement="top" title="Editar Empleado">edit</i>
+    
+                        <i class="material-icons colorRojo" (click)="deleteEmpleado(row)" data-toggle="tooltip" data-placement="top" title="Borrar Empleado">delete</i>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+     </div>
+     
+     
+         
+     
+     
+

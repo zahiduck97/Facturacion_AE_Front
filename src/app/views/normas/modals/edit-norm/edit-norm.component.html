@@ -1,0 +1,40 @@
+<div class="row">
+    <form class="col-sm-12"  #formEditNorma="ngForm">
+        <div class="row">
+            <h3  class=" colorAzul col-sm-12" style="text-align: center;">Editar Norma</h3>
+
+            <div class="divider"></div>
+
+            <!-- Loader -->
+            <div  style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+
+            <div mat-dialog-content class="col-sm-12">
+                <div class="form-group col-sm-12">
+                    <label for="nombre_Norma">Nombre Norma:</label>
+                    <input type="text" #nombre_Norma="ngModel" [(ngModel)]="data.norma.nombre_Norma" name="nombre_Norma" required class="form-control" id="nombre_Norma" oninput="this.value = this.value.toUpperCase()">
+                </div>
+    
+                <div class="form-group col-sm-12">
+                    <label for="descripcion_Norma">Descripcion Norma:</label>
+                    <textarea id="descripcion_Norma" class="form-control" required name="descripcion_Norma" #descripcion_Norma="ngModel" [(ngModel)]="data.norma.descripcion_Norma"></textarea>
+                </div>
+            </div>
+
+
+
+            <div mat-dialog-actions class="col-sm-12">
+                <div class="col-sm-12" style="margin-bottom: 10px;">
+                    <button class="btn botonCafe waves-effect waves-light" (click)="cerrarModal()" style="width: 100%;">Cancelar</button>
+                </div>
+    
+                <div class="col-sm-12">
+                    <input class="btn botonVerde waves-effect waves-light" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formEditNorma.form.valid" (click)="putNorma()">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+

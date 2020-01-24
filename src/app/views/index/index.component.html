@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="container">
+        <div class="card-title">
+            Bienvenido
+        </div>
+        <hr>
+        
+        <div class="card-content">
+            <p> Como eres un 
+                <strong *ngIf="response.rol == 'T'; else empleado">Tramitador</strong> <ng-template #empleado><strong>Usuario</strong></ng-template>
+                <span> Algunas de las actividades que puedes hacer son: </span>
+            </p>
+    
+        
+            <div class="list-group" *ngIf="response.rol == 'T'; else empleado2">
+                <a [routerLink]="['/formularios']"  class="list-group-item list-group-item-action"> Ver mis servicios Pendientes </a>
+                <a [routerLink]="['/formularios']" class="list-group-item list-group-item-action">Solicitar un nuevo servicio</a>
+            </div>
+
+            <ng-template #empleado2>
+                <div class="list-group" *ngIf="response; else empleado2">
+                    <a [routerLink]="['/formularios']"  class="list-group-item list-group-item-action"> Ver mis servicios Pendientes </a>
+                    <a [routerLink]="['/formularios']" class="list-group-item list-group-item-action">Solicitar un nuevo servicio</a>
+                    <a [routerLink]="['/empresas']" class="list-group-item list-group-item-action">Agregar y borrar una empresa</a>
+                    <a [routerLink]="['/empleados']" class="list-group-item list-group-item-action">Ver todos los empleados</a>
+                    <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action">Ver usuarios del sistema</a>
+                    
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

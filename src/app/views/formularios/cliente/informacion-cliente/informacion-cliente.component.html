@@ -1,0 +1,34 @@
+<h4  class="text-center ">
+    <span class="colorVerde">{{ data.info.nombre_tramitador }}</span>
+    <i (click)="cerralModal()" id="close" class="material-icons text-right">clear</i>
+    
+    <!-- Loader -->
+    <div  style="padding: 5px 0px;">
+        <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+    </div>
+</h4> 
+<hr>
+<mat-dialog-content class="text-center">
+    <h4 class="colorAzul">Datos del Producto</h4>
+
+    <p *ngIf="data.info.Servicio == 'C'; else isDictamen "><strong>Servicio: </strong> <span >Constancia</span></p>
+    <ng-template #isDictamen>
+        <p><strong>Servicio: </strong> Dictamen</p>
+    </ng-template>
+
+    <p><strong>Norma: </strong> {{ data.info.Norma }}</p>
+    <p><strong>Producto: </strong> {{ data.info.nombre_producto }}</p>
+
+    <p><strong>Producto: </strong> {{ data.info.nombre_producto }}</p>
+
+    <p><strong>Marca: </strong> {{ data.info.marca_producto }}</p>
+    <p><strong>Pais: </strong> {{ data.info.pais_producto }}</p>
+    <p><strong>Modelo: </strong> {{ data.info.modelo_producto }}</p>
+    <p><strong>Presentancion: </strong> {{ data.info.presentacion_producto }}</p>
+    <p><strong>Contenido: </strong> {{ data.info.contenido_producto }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+     <button mat-button class="botonVerde" style="margin-right: 5px;" [disabled]="desactivado" (click)="editarForm()"  *ngIf="data.info.status == 'E'">Editar</button>
+    <!-- <button mat-button class="botonRojo" [disabled]="desactivado" (click)="borrarFile(data.info.Id_Form)" *ngIf="data.info.status == 'E'">Borrar</button> -->
+</mat-dialog-actions>

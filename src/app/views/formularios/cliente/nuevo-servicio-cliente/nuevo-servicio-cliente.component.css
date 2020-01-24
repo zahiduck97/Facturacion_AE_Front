@@ -1,0 +1,28 @@
+.w-100{
+    width: 100%;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.font-15{
+    font-size: 20px !important;
+}
+
+div#checkbox label{
+    margin-right: 15px;
+}
+
+.mgt5{
+    margin-bottom: 30px;
+}
+
+button{
+    margin: 5px;
+}
+
+mat-radio-group mat-radio-button{
+    display: inline;
+    font-size: 20px !important;
+}

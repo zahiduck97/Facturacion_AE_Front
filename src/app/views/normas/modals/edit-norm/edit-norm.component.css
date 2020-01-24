@@ -1,0 +1,11 @@
+input,textarea,label,button{
+    font-size: 15px;
+}
+
+h3{
+    font-weight: bold !important;
+}
+
+textarea{
+    resize: none;
+}

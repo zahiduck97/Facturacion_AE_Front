@@ -1,0 +1,42 @@
+<div class="row">
+    <form class="col-sm-12"  #formAddEmpleado="ngForm">
+        <div class="row">
+            <h3 class="col-sm-12 colorAzul" style="text-align: center;">Editar Usuario</h3>
+
+            <div class="divider"></div>
+
+            <!-- Loader -->
+            <div class="col-md-12" style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+
+            
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="userEmail">Username:</label>
+                <input type="text" #userEmail="ngModel" [(ngModel)]="data.tramitador.userEmail" name="userEmail" required class="form-control" id="userEmail"  oninput="this.value = this.value.toUpperCase()">
+            </div>
+            
+            <div class="col-sm-12 col-md-6" >
+                <label for="select">Tramitador:</label>
+                <select class="custom-select" [(value)]="data.tramitador.Id_Tramitador" [(ngModel)]="data.tramitador.Id_Tramitador" required name="Id_Tramitador" id="select">
+                    <option *ngFor="let tramitador of tramitadores" [value]="tramitador.Id_Tramitador">{{ tramitador.nombre_tramitador }}</option>
+                </select>
+
+            </div>
+            <div class="col-sm-12"></div>
+             
+
+            <h4 class="botonRojo text-white col-sm-12 text-center"  *ngIf="isDifferent"><strong>Las contraseñas no coinciden</strong></h4>
+
+            <div class="col-sm-12" style="margin-bottom: 10px;">
+                <button class="btn botonCafe waves-effect" style="width: 100%;" (click)="cerrarModal()" [disabled]="desactivado">Cancelar</button>
+            </div>
+
+            <div class="col-sm-12">
+                <input class="btn waves-effect waves-light botonVerde" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formAddEmpleado.form.valid  || data.tramitador.Id_Tramitador === ''  || desactivado" (click)="editarTramitador()">
+            </div>
+
+        </div>
+    </form>
+</div>
+    

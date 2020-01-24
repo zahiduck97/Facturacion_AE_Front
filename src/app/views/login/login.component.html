@@ -1,0 +1,39 @@
+<div class="container h-100">
+	<div class="d-flex justify-content-center h-100">
+		<div class="user_card">
+			<div class="d-flex justify-content-center">
+				<div class="brand_logo_container">
+					<!-- <img src="https://webdevtrick.com/wp-content/uploads/logo-fb.png" class="brand_logo" alt="Logo"> -->
+					<img src="../../../assets/logo-AE.png" alt="Logo Ae Intertrade" class="brand_logo">
+				</div>
+			</div>
+			<div class="d-flex justify-content-center form_container">
+				<form #formAddEmpleado="ngForm">
+					
+					<!-- Loader -->
+					<div  style="padding: 5px 0px;">
+						<mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" name="userEmail" class=" form-control input_user" placeholder="UserName o Email" [(ngModel)]="usuario.userEmail" required >
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="password" class=" form-control input_pass" placeholder="Password" [(ngModel)]="usuario.password" required>
+					</div>
+					
+				</form>
+			</div>
+			<div class="d-flex justify-content-center mt-3 login_container">
+				<button type="submit" name="button" class="btn login_btn botonCafe" [disabled]="!formAddEmpleado.form.valid" (click)="login()">Login</button>
+			</div>
+		
+		</div>
+	</div>
+</div>

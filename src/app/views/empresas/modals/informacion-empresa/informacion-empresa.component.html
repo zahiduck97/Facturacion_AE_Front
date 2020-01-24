@@ -1,0 +1,24 @@
+<h4  class="text-center ">
+    <span class="colorVerde">{{ data.empresa.razonSocial }}</span>
+</h4> 
+<hr>
+<mat-dialog-content class="text-center">
+    <p><strong>No. de Contrato: </strong> {{ data.empresa.numeroContrato }}</p>
+    <p> <strong>RFC: </strong> {{ data.empresa.rfc }}</p>
+    <p><strong>Email: </strong> {{ data.empresa.email }}</p>
+    <p><strong>Telefono: </strong> {{ data.empresa.telefono }}</p>
+    
+    <h4 class="colorAzul">Domicilio Fiscal</h4>
+    <p><strong>Calle:  </strong> {{ data.empresa.calle }}</p>
+    <p><strong>Colonia: </strong> {{ data.empresa.colonia }}</p>
+    <p><strong>Alcaldia o Municipio: </strong> {{ data.empresa.municipio }}</p>
+    <p><strong>Estado: </strong> {{ data.empresa.estado }}</p>
+    <p><strong>Codigo Postal: </strong> {{ data.empresa.codigo_postal }}</p>
+    
+    <h4 class="colorAzul">Representante Legal</h4>
+    <p> <strong>Representante: </strong> {{ data.empresa.representante }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="botonCafe" style="margin-right: 5px;">Cerrar</button>
+</mat-dialog-actions>

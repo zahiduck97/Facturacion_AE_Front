@@ -1,0 +1,54 @@
+<div class="row">
+    <form class="col-sm-12"  #formEditTramitador="ngForm">
+        <div class="row">
+            <h3 class="colorAzul col-sm-12" style="text-align: center;">Editar Tramitador</h3>
+
+            <div class="divider"></div>
+
+            <!-- Loader -->
+            <div  style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="nombre_tramitador">Nombre Tramitador:</label>
+                <input type="text" #nombre_tramitador="ngModel" [(ngModel)]="data.tramitador.nombre_tramitador" name="nombre_tramitador" required class="form-control" (blur) ="data.tramitador.facturar_a = mayus(data.tramitador.facturar_a);">
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="email_tramitador">Email Tramitador:</label>
+                <input type="email" #email_tramitador="ngModel" [(ngModel)]="data.tramitador.email_tramitador" name="email_tramitador" required class="form-control" >
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="telefono_tramitador">Telefono Tramitador:</label>
+                <input type="number" #telefono_tramitador="ngModel" [(ngModel)]="data.tramitador.telefono_tramitador" name="telefono_tramitador" required class="form-control" >
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="facturar_a">Facturar a:</label>
+                <input type="text" #facturar_a="ngModel" [(ngModel)]="data.tramitador.facturar_a" name="facturar_a" required class="form-control" (blur)="data.tramitador.facturar_a = mayus(data.tramitador.facturar_a);">
+            </div>
+
+            <mat-form-field class="form-group col-sm-12">
+                <mat-label>Empresa:</mat-label>
+                <mat-select [(value)]="selected" [(ngModel)]="data.tramitador.Id_Empresa" name="IdEmpresa" required>
+                    <mat-option *ngFor="let item of empresas" [value]="item.Id_Empresa">{{ item.razonSocial }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="col-sm-12" style="margin-bottom: 10px;">
+                <button class="btn botonCafe waves-effect" (click)="cerrarModal()" style="width: 100%;">Cancelar</button>
+            </div>
+
+            <div class="col-sm-12">
+                <input class="btn waves-effect waves-light botonVerde" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formEditTramitador.form.valid || data.tramitador.Id_Empresa === '' " (click)="putTramitador()">
+            </div>
+
+        </div>
+    </form>
+</div>
+
+         
+    
+            

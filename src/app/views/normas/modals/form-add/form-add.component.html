@@ -1,0 +1,34 @@
+<div class="row">
+    <form class="col-sm-12"  #formAddNorma="ngForm">
+        <div class="row">
+            <h3 class="colorAzul col-sm-12" style="text-align: center;">Agregar Norma</h3>
+
+            <div class="divider"></div>
+
+            <!-- Loader -->
+        <div  style="padding: 5px 0px;">
+            <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+        </div>
+
+            <div class="form-group col-sm-12">
+                <label for="nombre_Norma">Nombre Norma:</label>
+                <input type="text" #nombre_Norma="ngModel" [(ngModel)]="norma.nombre_Norma" name="nombre_Norma" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label for="descripcion_Norma">Descripcion Norma:</label>
+                <textarea id="descripcion_Norma" class="form-control" required [(ngModel)]="norma.descripcion_Norma" name="descripcion_Norma"  cols="20"></textarea>
+            </div>
+
+            <div class="col-sm-12" style="margin-bottom: 10px;">
+                <button class="btn botonCafe waves-effect" (click)="cerrarModal()" style="width: 100%;">Cancelar</button>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <input class="btn waves-effect waves-light botonVerde" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formAddNorma.form.valid" (click)="postNorma()">
+            </div>
+
+        </div>
+    </form>
+</div>
+

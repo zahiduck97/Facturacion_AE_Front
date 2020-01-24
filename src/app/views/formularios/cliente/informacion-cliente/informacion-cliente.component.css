@@ -1,0 +1,36 @@
+strong{
+    font-weight: bold;
+}
+
+h3{
+    font-weight: bold;
+}
+
+button{
+    color: white;
+    font-size: 20px;
+}
+
+
+.colorLila {
+    color: #93a3b1 !important;
+}
+
+.botonLila {
+    background-color: #93a3b1 !important;
+}
+
+.colorNaranja {
+    color: #ffca1c !important;
+}
+
+
+.botonNaranja{
+    background-color: #ffca1c !important;
+}
+
+
+#close{
+    cursor: pointer;
+}
+

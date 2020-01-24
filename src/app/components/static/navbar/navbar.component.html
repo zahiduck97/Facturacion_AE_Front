@@ -1,0 +1,50 @@
+<!--Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark botonGrisFuerte">
+    <a class="navbar-brand" [routerLink]="['/index']">Facturacion AE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+      aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+      
+      <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="mostrarTramitador == false; else navTramitador">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/normas']">Normas</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/empleados']">Empleados</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/empresas']">Empresas</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/tramitadores']">Tramitadores</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/usuarios']">Usuarios</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/formularios']">Formularios</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/facturas']">Facturas</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+
+      <ng-template #navTramitador>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/formulariosCliente']">Formularios</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </ng-template>
+
+    </div>
+  </nav>
+  <!--/.Navbar -->

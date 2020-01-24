@@ -1,0 +1,99 @@
+<div class="container card mt-5">
+   <div>
+        
+        <!-- Loader -->
+        <div  style="padding: 5px 0px;">
+            <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+        </div>
+    
+        <div class="w-100">
+            <div class="text-center mt-3">
+                <h3><strong class="colorAzul">USUARIOS</strong></h3>
+            </div>
+        
+                
+
+            <div class="row ">
+                <div class="col-sm-12 col-md-6">
+                    <div class="d-flex">
+                        <button class="btn" (click)="conectarServidor()" data-toggle="tooltip" data-placement="top" title="Recargar Usuarios">
+                            <i class="material-icons">replay</i>
+                        </button>
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <button class="btn botonAzul white-text" (click)="addTramitador()" [disabled]="desactivado"> Nuevo Tramitador</button> 
+                    <button class="btn botonRojo white-text" (click)="addEmpleado()" [disabled]="desactivado"> Nuevo Empleado</button> 
+                </div>
+            </div>
+  
+        </div>
+    
+    
+    <div>
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef  class="botonAzul text-white text-center" style="font-size: 20px;">  Usuario </th>
+            <td mat-cell *matCellDef="let row">
+                 
+                <span *ngIf="row.nombre_Tramitador; else nombre_Empleado"> {{row.nombre_Tramitador}}  </span>
+                <ng-template #nombre_Empleado>
+                    <span > {{row.nombre_Empleado}}  </span>
+                </ng-template>
+            </td>
+          </ng-container>
+      
+          <!-- Progress Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef  class="botonAzul text-white text-center" style="font-size: 20px;"> Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.userEmail}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="rol">
+            <th mat-header-cell *matHeaderCellDef class="botonAzul text-white text-center" style="font-size: 20px;"> Rol </th>
+            <td mat-cell *matCellDef="let row">
+                <span *ngIf="row.rol == 'T'; else rolEmpleado"> Tramitador  </span>
+                <ng-template #rolEmpleado>
+                    <span > Empleado  </span>
+                </ng-template>
+            </td>
+          </ng-container>
+      
+          <!-- Color Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef  class="botonAzul text-white text-center" style="font-size: 20px;"> Acciones </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color">
+                <i class="material-icons colorAmarillo" (click)="editarPassword(row)" data-toggle="tooltip" data-placement="top" title="Cambiar Contraseña">vpn_key</i>        
+
+                <i class="material-icons colorAzul" (click)="editarTramitador(row)" *ngIf="row.rol == 'T'; else rowEmpleado" data-toggle="tooltip" data-placement="top" title="Editar Usuario">edit</i>
+                
+                <ng-template #rowEmpleado>
+                    <i class="material-icons colorAzul" (click)="editarTramitador(row)"data-toggle="tooltip" data-placement="top" title="Editar Usuario">edit</i>
+                </ng-template>
+    
+                <i class="material-icons colorRojo" (click)="deleteUsuario(row)" data-toggle="tooltip" data-placement="top" title="Borrar Usuario">delete</i>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+
+   </div>
+</div>
+
+
+
+    
+

@@ -1,0 +1,86 @@
+<h4  class="text-center ">
+    <span class="colorVerde">Solicitud de Factura</span>
+    <i (click)="cerralModal()" id="close" class="material-icons text-right">clear</i>
+    
+    <!-- Loader -->
+    <div  style="padding: 5px 0px;">
+        <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+    </div>
+</h4> 
+<hr>
+
+<!-- Dialog COntent -->
+<mat-dialog-content class="text-center">
+    <div class="row">
+        <div class="col-sm-12">
+            <p><strong>FECHA:</strong> {{ fecha }}</p>
+        </div>
+
+        <div class="col-sm-12">
+            <p> <strong>NOMBRE DEL CLIENTE:</strong> {{ data.form.razonSocial }} </p>
+        </div>
+        
+        <div class="col-sm-12">
+            <p> <strong>FACTURAR A:</strong> {{ data.form.razonSocial }} </p>
+        </div>
+
+        <div class="col-sm-12">
+            <p> <strong>NOMBRE DEL TRAMITADOR:</strong> {{ tramitador.facturar_a }} </p>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <input type="number" placeholder="TELEFONO DEL TRAMITADOR" [(ngModel)]="tramitadorJ.telefono" class="form-control">
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <input type="email" placeholder="CORREO DEL TRAMITADOR" [(ngModel)]="tramitadorJ.correo" class="form-control">
+        </div>
+    </div>
+
+    <!-- Table -->
+    <table class="striped centered mt-2">
+        <thead>
+            <tr>
+                <th>NORMA</th>
+                <th>TIPO DE SERVICIO</th>
+                <th>PRODUCTO, MARCA y MODELO</th>
+                <th>PRECIO</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>{{Norma.nombre_Norma}}</td>
+                <td *ngIf="formulario.Servicio == 'C';else dictamen">Constancia</td>
+                <ng-template #dictamen><td>Dictamen</td></ng-template>
+                <td> <strong>Producto:</strong> {{ formulario.nombre_producto }}; <strong>Marca:</strong> {{ formulario.marca_producto }}; <strong>Modelo (s):</strong> {{ formulario.modelo_producto }} </td>
+                <td><input type="number" placeholder="PRECIO INICIAL" [(ngModel)]="precioInicial" (change)="sumaTotal()" class="form-control"></td>
+            </tr>
+            
+            <tr *ngFor="let item of contador; let i = index">
+               <td></td> 
+               <td><input type="text" [(ngModel)]="cuenta.concepto1[i]" class="form-control"></td>
+               <td><input type="text" [(ngModel)]="cuenta.concepto2[i]" class="form-control"></td>
+               <td><input type="number" [(ngModel)]="cuenta.precio[i]" placeholder="PRECIO" (change)="sumaTotal()" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <strong>TOTAL SIN IVA:</strong>
+                </td>
+                <td>
+                    <input type="number" placeholder="TOTAL" [(ngModel)]="total" class="form-control" readonly>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn botonAzul" style="margin-right: 5px; margin-top: 5px;" [disabled]="desactivado || contador.length === 14" (click)="agregarContador()">Nueva Fila</button>
+
+    <button class="btn botonRojo" style="margin-right: 5px; margin-top: 5px;" [disabled]="desactivado || contador.length === 0" (click)="quitarContador()">Quitar Fila</button>
+
+    <button class="btn botonVerde" style="margin-right: 5px; margin-top: 5px;" [disabled]="desactivado" (click)="enviarFactura()">Guardar Factura</button>
+
+</mat-dialog-content>

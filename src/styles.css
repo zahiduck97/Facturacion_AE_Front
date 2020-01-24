@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { 
+    height: 100%; 
+    background-color:#ccc !important ;
+
+}
+body { margin: 0; font-family: 'Roboto', sans-serif; font-size: 20px; }
+
+.card {
+    border-radius: 10px;
+}
+
+input[type=text]{
+    text-transform:uppercase;
+}
+
+a{
+    cursor: pointer;
+}
+
+.btn{
+    margin:5px;
+}
+
+
+thead tr {
+    background: #2ab7ca;
+    color: white;
+    font-weight: bold !important;
+}
+
+.botonAzul{
+    background-color: #2ab7ca !important;
+}
+
+.botonRojo{
+    background-color: #fe4a49 !important;
+}
+
+.botonAmarillo{
+    background-color: #fed766 !important;
+}
+
+.botonCafe{
+    background-color: #41393E !important;
+}
+
+.botonVerde{
+    background-color: #2CB220 !important;
+}
+
+.botonGrisFuerte{
+    background-color: #4d4d4d !important;
+}
+
+.botonBlanco{
+    background-color: white !important;
+}
+
+.colorGrisFuerte{
+    background-color: #4d4d4d !important;
+}
+
+.colorAzul{
+    color: #2ab7ca !important;
+}
+
+.colorRojo{
+    color: #fe4a49 !important;
+}
+
+.colorAmarillo{
+    color: #fed766 !important;
+}
+
+.colorCafe{
+    color: #41393E !important;
+}
+
+.colorVerde{
+    color: #2CB220 !important;
+}
+
+.colorBlanco{
+    color: white !important;
+}
+
+a.btn-floating i.material-icons{
+    color: #41393E;
+}
+
+strong{
+    font-weight: bold;
+}
+
+i{
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+

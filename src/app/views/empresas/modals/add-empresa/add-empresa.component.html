@@ -1,0 +1,90 @@
+<div  class="row">
+    <form class="col-md-12"  #formAddEmpresa="ngForm">
+        <div class="row">
+            <h3  class="colorVerde col-md-12" style="text-align: center;">Agregar Empresa</h3>
+
+            <div class="divider"></div>
+
+            <!-- Loader -->
+            <div  style="padding: 5px 0px;">
+                <mat-progress-bar mode="indeterminate" *ngIf="preloaderActivo"></mat-progress-bar>
+            </div>
+
+            <div mat-dialog-content class="col-sm-12">
+                <div class="row">    
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="razonSocial">Razon Social:</label>
+                        <input type="text" #razonSocial="ngModel" [(ngModel)]="empresa.razonSocial" name="razonSocial" id="razonSocial" required oninput="this.value = this.value.toUpperCase()" class="form-control">
+                    </div>
+        
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="numeroContrato">Numero de Contrato:</label>
+                        <input type="text" #numeroContrato="ngModel" [(ngModel)]="empresa.numeroContrato" name="numeroContrato" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                    
+        
+                    <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                        <label for="rfc">RFC:</label>
+                        <input type="text" #rfc="ngModel" [(ngModel)]="empresa.rfc" name="rfc" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                    
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                        <label for="email">Email:</label>
+                        <input type="email" #email="ngModel" [(ngModel)]="empresa.email" name="email" required class="form-control">
+                    </div>
+        
+                    <div class="form-group col-sm-12 col-md-12 col-lg-3">
+                        <label for="telefono">Telefono:</label>
+                        <input type="number" #telefono="ngModel" [(ngModel)]="empresa.telefono" name="telefono" required class="form-control">
+                    </div>
+
+                    <h3  class="colorAzul col-md-12" style="text-align: center;">Domicilio Fiscal</h3>
+        
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="calle">Calle:</label>
+                        <input type="text" #calle="ngModel" [(ngModel)]="empresa.calle" name="calle" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+        
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="colonia">Colonia:</label>
+                        <input type="text" #colonia="ngModel" [(ngModel)]="empresa.colonia" name="colonia" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+        
+                    <div class="form-group col-sm-8 col-md-6">
+                        <label for="municipio">Municipio:</label>
+                        <input type="text" #municipio="ngModel" [(ngModel)]="empresa.municipio" name="municipio" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+        
+                    <div class="form-group col-sm-4 col-md-4">
+                        <label for="estado">Estado:</label>
+                        <input type="text" #estado="ngModel" [(ngModel)]="empresa.estado" name="estado" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+        
+                    <div class="form-group col-sm-6 col-md-2">
+                        <label for="codigo_postal">CP:</label>
+                        <input type="number" #codigo_postal="ngModel" [(ngModel)]="empresa.codigo_postal" name="codigo_postal" required class="form-control">
+                    </div>
+
+                    <h3  class="colorAzul col-sm-12" style="text-align: center;">Representante</h3>
+        
+                    <div class="form-group col-sm-12">
+                        <label for="representante">Representante:</label>
+                        <input type="text" #representante="ngModel" [(ngModel)]="empresa.representante" name="representante" required class="form-control" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                </div>
+            </div>  
+            
+            <div mat-dialog-actions class="col-sm-12">
+                <div class="col-sm-12" style="margin-bottom: 10px;">
+                    <button class="btn botonCafe waves-effect" (click)="cerrarModal()" style="width: 100%;">Cancelar</button>
+                </div>
+    
+                <div class="col-sm-12">
+                    <input class="btn botonVerde" type="submit" style="width: 100%;" value="Guardar" [disabled]="!formAddEmpresa.form.valid || desactivado" (click)="postEmpresa()">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div >
+
