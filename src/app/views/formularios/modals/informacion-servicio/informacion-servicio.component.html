@@ -58,10 +58,7 @@
 
 <mat-dialog-actions align="end">
     
-    <button mat-button class="botonNaranja" style="margin-right: 5px;" (click)="generarPreservice()" *ngIf="data.info.status == 'E'; else finalService" [disabled]="desactivado">Pre Solicitud</button>
-    <ng-template #finalService>
-        <button mat-button class="botonLila" style="margin-right: 5px;" (click)="generarService()" [disabled]="desactivado">Solicitud</button>
-    </ng-template>
+    <button *ngIf="data.info.status == 'V' " mat-button class="botonLila" style="margin-right: 5px;" (click)="generarService()" [disabled]="desactivado">Solicitud</button>
 
     <button mat-button class="botonLila" style="margin-right: 5px;" [disabled]="desactivado" (click)="abrirFactura()" *ngIf="data.info.status == 'E'">Validar</button>
     <button mat-button class="botonVerde" style="margin-right: 5px;" [disabled]="desactivado" (click)="editarForm()">Editar</button>

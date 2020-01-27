@@ -98,49 +98,49 @@ export class UsuariosComponent implements OnInit {
           }
           this.preloaderActivo = false;
           this.desactivado = false;
-        }
-      ),
-
-      this.preloaderActivo = true;
-      this.desactivado = true;
-    
-      this.usuariosService.getUserTramitadores()
-      .subscribe(
-        tramitadores => {
-          this.tramitadores = tramitadores;
-          console.log(this.tramitadores);
-          this.preloaderActivo = false;
-          this.desactivado = false;
-          this.union = this.tramitadores.concat(this.empleados);
-          this.dataSource.data = this.union
-          console.log('qq', this.union);
         },
-        err => {
-          console.log(err);
-          if(err.status == 0){
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'El servidor no esta conectado'
-            }) 
-          } else if(err.status == 401){
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: err.error
-            }) 
-            this.router.navigate(['/']);
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: err.error.mensaje
-            }) 
-          }
-          this.preloaderActivo = false;
-          this.desactivado = false;
+        () => {
+          this.preloaderActivo = true;
+          this.desactivado = true;
+        
+          this.usuariosService.getUserTramitadores()
+          .subscribe(
+            tramitadores => {
+              this.tramitadores = tramitadores;
+              console.log(this.tramitadores);
+              this.preloaderActivo = false;
+              this.desactivado = false;
+              this.union = this.tramitadores.concat(this.empleados);
+              this.dataSource.data = this.union
+            },
+            err => {
+              console.log(err);
+              if(err.status == 0){
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'El servidor no esta conectado'
+                }) 
+              } else if(err.status == 401){
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: err.error
+                }) 
+                this.router.navigate(['/']);
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: err.error.mensaje
+                }) 
+              }
+              this.preloaderActivo = false;
+              this.desactivado = false;
+            }
+          )
         }
-      )
+      );
   }   
   
   // Agregar Un Usuario Tramitdor

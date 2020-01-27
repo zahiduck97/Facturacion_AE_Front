@@ -9,10 +9,10 @@
       
       <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="mostrarTramitador == false; else navTramitador">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/normas']">Normas</a>
+          <a class="nav-link" [routerLink]="['/formularios']">Servicios</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/empleados']">Empleados</a>
+          <a class="nav-link" [routerLink]="['/facturas']">Facturas</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/empresas']">Empresas</a>
@@ -23,11 +23,11 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/usuarios']">Usuarios</a>
         </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['/empleados']">Empleados</a>
+            </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/formularios']">Formularios</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/facturas']">Facturas</a>
+          <a class="nav-link" [routerLink]="['/normas']">Normas</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" (click)="logout()">Logout</a>
@@ -37,7 +37,7 @@
       <ng-template #navTramitador>
         <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/formulariosCliente']">Formularios</a>
+            <a class="nav-link" [routerLink]="['/formulariosCliente']">Servicios</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" a (click)="logout()">Logout</a>
