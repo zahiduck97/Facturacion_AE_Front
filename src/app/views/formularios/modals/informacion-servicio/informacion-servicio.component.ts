@@ -9,6 +9,9 @@ import * as firebase from "firebase";
 import * as JSZip from 'jszip';
 import Swal from 'sweetalert2'
 import { InformacionEmpresaComponent } from 'src/app/views/empresas/modals/informacion-empresa/informacion-empresa.component';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -25,6 +28,7 @@ export class InformacionServicioComponent implements OnInit {
   public array_Anexos_dictamen = [];
   public arrayAnexos:string[]=[ 'Etiqueta', 'Empaque o Artes', 'Imágenes', 'Instructivo', 'Garantía' ];
   public arrayAnexosDictamen:string[]=[ 'Pedimento', 'Factura' ];
+  
 
   // Constructor
   constructor(
@@ -198,33 +202,70 @@ export class InformacionServicioComponent implements OnInit {
       }
     })
   }
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        resolve(dataURL);
+      };
+      img.onerror = error => {
+        reject(error);
+      };
+      img.src = url;
+    });
+  }
   
   // Final Service
-  generarService(){
-    this.preloaderActivo = true;
-    this.desactivado = true;
-    this._formulario.getFinalService(this.data.info.Id_Form).subscribe(res => {
-      saveAs(res, 'solicitud.pdf');
-      this.preloaderActivo = false;
-      this.desactivado = false;
-    },
-    e => {
-      console.log(e);
-      if(!e.error.mensaje)
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'El servidor no esta conectado'
-        })
-      else 
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: e.error.mensaje
-        })
+  async generarService(){
+    let perro = 'perro ytfrtygyytf';
+    const data = { 
+      content: [
+        `${perro}` 
+      ],
+      pageSize: 'LETTER',
+      background: [
+        {
+          image: await this.getBase64ImageFromURL(
+            "https://scontent-dfw5-1.xx.fbcdn.net/v/t1.15752-9/p1080x2048/81947463_445969826309234_7412464939819859968_n.jpg?_nc_cat=101&_nc_ohc=1K2HcCX2QXIAX_7PxBw&_nc_ht=scontent-dfw5-1.xx&_nc_tp=1&oh=53b9460fe42f33fab4270cf979bd1290&oe=5E97C8C3"
+          ),
+          width: 792
+        }
+      ]
+    };
+  pdfMake.createPdf(data).open();
+ }
+  //   this.preloaderActivo = true;
+  //   this.desactivado = true;
+  //   this._formulario.getFinalService(this.data.info.Id_Form).subscribe(res => {
+  //     saveAs(res, 'solicitud.pdf');
+  //     this.preloaderActivo = false;
+  //     this.desactivado = false;
+  //   },
+  //   e => {
+  //     console.log(e);
+  //     if(!e.error.mensaje)
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Error',
+  //         text: 'El servidor no esta conectado'
+  //       })
+  //     else 
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Error',
+  //         text: e.error.mensaje
+  //       })
       
-      this.preloaderActivo = false;
-      this.desactivado = false;
-    }); 
-  }
+  //     this.preloaderActivo = false;
+  //     this.desactivado = false;
+  //   }); 
+  // }
 }
